@@ -4,6 +4,8 @@ import re
 from typing import List
 
 
-def filter_datum(fields: List[str], redaction: str, msg: str, sep: str) -> str:
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
     """Return the Obfuscated version of a message."""
-    return re.sub(fr"({'|'.join(fields)})=[^{sep}]*", fr"\1={redaction}", msg)
+    return re.sub(
+        fr"({'|'.join(fields)})=[^{separator}]*", fr"\1={redaction}", message)
