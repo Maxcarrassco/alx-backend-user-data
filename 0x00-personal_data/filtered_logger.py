@@ -70,7 +70,7 @@ def main() -> None:
             f'name={name};email={email};phone={phone};ssn={ssn}'
             f'password=password;ip={ip};'
             f'last_login={last_login};user_agent={user_agent};')
-        logger = logging.LogRecord('user-data', logging.INFO, None, None,
+        logger = logging.LogRecord('user_data', logging.INFO, None, None,
                                    msg, None, None)
         print(fmt.format(logger))
 
