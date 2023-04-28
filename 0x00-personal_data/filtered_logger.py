@@ -39,7 +39,7 @@ class RedactingFormatter(logging.Formatter):
 def get_logger() -> logging.Logger:
     """Return a new log"""
     logger = logging.getLogger('user_data')
-    logger.setLevel(logging.info)
+    logger.setLevel(logging.INFO)
     logger.propagate = False
     fmt = RedactingFormatter(PII_FIELDS)
     handler = logging.StreamHandler()
