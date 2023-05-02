@@ -26,7 +26,7 @@ def stats() -> str:
     return jsonify(stats)
 
 
-@app_views.route('/unauthorized')
-def raise_unauthorized() -> None:
+@app_views.route('/unauthorized', methods=["GET"], strict_slashes=False)
+def raise_unauthorized() -> str:
     """Raise unauthorized exception."""
     abort(401)
