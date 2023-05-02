@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ALX SE Backend Basic Auth Module"""
-from flask import request, Request
-from typing import Union, List, TypeVar
+from flask import request
+from typing import List, TypeVar
 
 
 class Auth:
