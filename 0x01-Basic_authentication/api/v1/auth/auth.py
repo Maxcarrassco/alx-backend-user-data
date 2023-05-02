@@ -3,8 +3,6 @@
 from flask import request, Request
 from typing import Union, List, TypeVar
 
-User = TypeVar('User')
-
 
 class Auth:
     """Implement Custom Basic Auth."""
@@ -13,12 +11,10 @@ class Auth:
         """Check if a route require the user to be authenticated."""
         return False
 
-    def authorization_header(self, request: Union[Request, None] = None
-                             ) -> Union[str, None]:
+    def authorization_header(self, request=None) -> str:
         """Return the Authorization header from the request."""
         return None
 
-    def current_user(self, request: Union[Request, None] = None
-                     ) -> Union[User, None]:
+    def current_user(self, request=None) -> TypeVar('User'):
         """Return the current user."""
         return None
