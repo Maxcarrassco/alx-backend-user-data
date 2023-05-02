@@ -21,6 +21,11 @@ def not_found(error) -> Tuple[str, int]:
     """
     return jsonify({"error": "Not found"}), 404
 
+@app.errorhandler(401)
+def unauthorized(error) -> Tuple[str, int]:
+    """Custom error handler for unauthorized request."""
+    return jsonify({'error': 'Unauthorized'}), 401
+
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")

@@ -24,3 +24,8 @@ def stats() -> str:
     stats = {}
     stats['users'] = User.count()
     return jsonify(stats)
+
+@app_views.route('/unauthorized')
+def raise_unauthorized() -> None:
+    """Raise unauthorized exception."""
+    abort(401)
