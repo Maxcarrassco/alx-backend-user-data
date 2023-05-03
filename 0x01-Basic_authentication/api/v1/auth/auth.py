@@ -10,9 +10,11 @@ class Auth:
         """Check if a route require the user to be authenticated."""
         if not path or not excluded_paths:
             return True
-        if path in excluded_paths or (
-                path[-1] != '/' and path + '/' in excluded_paths):
-            return False
+        for e_path in excluded_paths:
+            e_len = len(e_path) - 1
+            if path[:e_len] == e_path[:e_len] or (
+                    path[-1] != '/' and path + '/'[:e_len] == e_path[:e_len]):
+                return False
         return True
 
     def authorization_header(self, request=None) -> str:
