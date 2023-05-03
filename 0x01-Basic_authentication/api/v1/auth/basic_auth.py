@@ -4,6 +4,7 @@ from api.v1.auth.auth import Auth
 from base64 import b64decode
 from typing import Tuple, TypeVar
 from models.user import User
+from models.base import DATA
 
 
 class BasicAuth(Auth):
@@ -44,11 +45,13 @@ class BasicAuth(Auth):
         return cred[0], cred[1]
 
     def user_object_from_credentials(
-            self, user_email: str, user_pwd: str) -> TypeVar('User'):
+            self, user_email: str, user_pwd: str) -> User:
         """Return user instance from user_email and user_pwd or return None."""
         if not user_email or type(user_email) is not str:
             return None
         if not user_pwd or type(user_pwd) is not str:
+            return None
+        if 'User' not in DATA:
             return None
         for user in User.search({'email': user_email}):
             if user.is_valid_password(user_pwd):
