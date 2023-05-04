@@ -28,3 +28,13 @@ def login_user_view() -> str:
         if i == len(users) - 1:
             return {'error': 'wrong password'}, 401
     return {'error': 'no user found for this email'}, 404
+
+
+@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+def logout_user_view() -> str:
+    """Delete current user session."""
+    from api.v1.app import auth
+    is_session_destroy = auth.destroy_session(request)
+    if not is_session_destroy:
+        abort(404)
+    return {}, 200
