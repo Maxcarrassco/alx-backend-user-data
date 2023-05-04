@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """ALX SE Backend Basic Auth Module"""
-from typing import List, TypeVar
+from typing import List, Union
+from models.user import User
+from os import getenv
+from flask import request
 
 
 class Auth:
@@ -17,12 +20,22 @@ class Auth:
                 return False
         return True
 
-    def authorization_header(self, request=None) -> str:
+    def authorization_header(self, request=None) -> Union[str, None]:
         """Return the Authorization header from the request."""
         if not request:
             return None
         return request.headers.get('Authorization')
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request=None) -> Union[User, None]:
         """Return the current user."""
         return None
+
+    def session_cookie(self, request=None) -> Union[str, None]:
+        """Return the value of a cookie from request."""
+        if not request:
+            return None
+        cookies = getattr(request, 'cookies', None)
+        if not cookies:
+            return None
+        session_name = getenv('SESSION_NAME')
+        return cookies.get(session_name)
