@@ -2,13 +2,13 @@
 """ALX SE Backend Custom Session Auth Module."""
 from api.v1.auth.auth import Auth
 import uuid
-from typing import Dict, Union
+from typing import Dict, Union, Any
 from models.user import User
 
 
 class SessionAuth(Auth):
     """This module implement all functionalities of a session auth service."""
-    user_id_by_session_id: Dict[str, str] = {}
+    user_id_by_session_id: Dict[str, Any] = {}
 
     def create_session(self, user_id: str = None) -> Union[str, None]:
         """Create a new user session."""
