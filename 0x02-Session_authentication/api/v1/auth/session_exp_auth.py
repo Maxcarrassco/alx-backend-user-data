@@ -35,7 +35,7 @@ class SessionExpAuth(SessionAuth):
             return None
         user = self.user_id_by_session_id[session_id]
         if self.session_duration <= 0:
-            return getattr(user, 'user_id')
+            return user['user_id']
         if 'created_at' not in user:
             return None
         if ((user['created_at'] + timedelta(
