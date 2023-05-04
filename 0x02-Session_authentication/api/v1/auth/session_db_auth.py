@@ -5,6 +5,7 @@ from models.user_session import UserSession
 from typing import Union
 from datetime import datetime, timedelta
 from uuid import uuid4
+from models.base import DATA
 
 
 class SessionDBAuth(SessionExpAuth):
@@ -25,6 +26,8 @@ class SessionDBAuth(SessionExpAuth):
         """Return the user_id from the session from storage."""
         if not session_id:
             return None
+        if 'UserSession' not in DATA:
+            return None
         session = UserSession.search({'session_id': session_id})
         if not session:
             return None
@@ -43,6 +46,8 @@ class SessionDBAuth(SessionExpAuth):
             return False
         session_id = self.session_cookie(request)
         if not session_id:
+            return False
+        if 'UserSession' not in DATA:
             return False
         session = UserSession.search({'session_id': session_id})
         if not session:
