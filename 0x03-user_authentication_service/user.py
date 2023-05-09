@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
 """User Service Module."""
-from sqlalchemy import String
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy import String, Column, Integer
+from sqlalchemy.ext.declarative import declarative_base
 
 
-class Base(DeclarativeBase):
-    """Sqlachemy Base Model."""
-    pass
+Base = declarative_base()
 
 
 class User(Base):
     """User Model."""
     __tablename__ = 'users'
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    email: Mapped[str] = mapped_column(String(250), nullable=False)
-    hashed_password: Mapped[str] = mapped_column(String(250), nullable=False)
-    session_id: Mapped[str] = mapped_column(String(250))
-    reset_token: Mapped[str] = mapped_column(String(250))
+    id = Column(Integer, primary_key=True)
+    email = Column(String(250), nullable=False)
+    hashed_password = Column(String(250), nullable=False)
+    session_id = Column(String(250))
+    reset_token = Column(String(250))
