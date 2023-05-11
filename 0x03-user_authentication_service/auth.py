@@ -1,4 +1,4 @@
-#!/usr/bin/usr/env python3
+#!/usr/bin/env python3
 """Auth Module of User Service."""
 import bcrypt
 
