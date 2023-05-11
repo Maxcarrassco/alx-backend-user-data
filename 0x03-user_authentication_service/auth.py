@@ -66,5 +66,5 @@ class Auth:
         """Reset user session_id to None in the database."""
         try:
             self._db.update_user(id=user_id, session_id=None)
-        except ValueError:
-            pass
+        except Exception:
+            return None
