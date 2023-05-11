@@ -5,6 +5,7 @@ from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
 from uuid import uuid4
+from typing import Union
 
 
 def _hash_password(password: str) -> bytes:
@@ -42,3 +43,13 @@ class Auth:
     def _generate_uuid(self) -> str:
         """Return a uuid4 in a string form."""
         return str(uuid4())
+
+    def create_session(self, email: str) -> Union[str, None]:
+        """Create a new session for an user."""
+        try:
+            user = self._db.find_user_by(email=email)
+            session_id = self._generate_uuid()
+            self._db.update_user(user.id, session_id=session_id)
+            return session_id
+        except NoResultFound:
+            return None
