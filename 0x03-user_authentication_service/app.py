@@ -27,11 +27,13 @@ def register_user():
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login_user():
     """Login a user."""
-    form = request.form
-    if not AUTH.valid_login(form.get('email'), form.get('password')):
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if not email or not password:
         abort(401)
-    email = form.get('email')
-    session_id = AUTH.create_session(form.get('email'))
+    if not AUTH.valid_login(email, password):
+        abort(401)
+    session_id = AUTH.create_session(email)
     response = make_response({'email': f'{email}', "message": "logged in"})
     response.set_cookie('session_id', session_id)
     return response
