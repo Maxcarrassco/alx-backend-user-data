@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """App Server Module Of User Service."""
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, abort
 from auth import Auth
 
 app = Flask(__name__)
