@@ -47,7 +47,9 @@ def logout_user():
     if not user:
         abort(403)
     AUTH.destroy_session(user.id)
-    return redirect('/')
+    response = make_response(redirect('/'))
+    response.set_cookie('session_id', '', expires=0)
+    return response
 
 
 if __name__ == '__main__':
