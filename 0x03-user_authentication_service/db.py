@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from user import Base, User
-from typing import Union, Any
+from typing import Union
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -39,12 +39,10 @@ class DB:
         self._session.commit()
         return user
 
-    def find_user_by(self, **attrs: Any) -> User:
+    def find_user_by(self, **attrs) -> User:
         """Return the first user found given an arbitary key."""
         try:
-            user = self._session.query(User).filter_by(**attrs).first()
-            if not user:
-                raise NoResultFound
+            user = self._session.query(User).filter_by(**attrs).one()
             return user
         except (NoResultFound, InvalidRequestError):
             raise
