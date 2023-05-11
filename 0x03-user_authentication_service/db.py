@@ -49,7 +49,7 @@ class DB:
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """Update a user if possible or raise ValueError."""
-        user = self.find_user_by(user_id=user_id)
+        user = self.find_user_by(id=user_id)
         columns = User.__table__.columns.keys()
         for key, value in kwargs.items():
             if key not in columns:
